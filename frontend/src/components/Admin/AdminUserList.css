@@ -1,0 +1,9 @@
+.user-list {
+  height: 30vh;
+  overflow-y: scroll;
+  overflow-x: auto;
+}
+
+.user-list::-webkit-scrollbar {
+  display: none;
+}

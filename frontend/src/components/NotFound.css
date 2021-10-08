@@ -1,0 +1,23 @@
+.nf-container{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.nf-header{
+z-index:1;
+font-size:15rem;
+color:grey;
+position:relative;
+}
+
+.nf-body{
+z-index:1;
+font-size:3rem;
+position:absolute;
+top: 50%;
+left: 50%;
+-webkit-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+}
