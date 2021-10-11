@@ -39,10 +39,11 @@ const Post = () => {
       let res = await axios.post(
         "http://localhost:5000/comments",
         {
-          author: cauthor || "Default",
+          author: auth.user.email.split("@")[0] || "Default",
           content: writeComment,
-          email: localStorage.getItem("email"),
-          post_id: e.target.value
+          email: auth.user.email,
+          post_id: e.target.value,
+          user_id: auth.user.user_id
         },
         {
           headers: {
@@ -94,7 +95,7 @@ const Post = () => {
                   >
                     Write Comment
                   </button>
-                  {localStorage.getItem("token") ? (
+                  {auth.token ? (
                     <></>
                   ) : (
                     <p className="mt-3 text-danger">

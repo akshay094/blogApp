@@ -52,17 +52,17 @@ export default function App() {
           <Route
             exact
             path="/login"
-            render={() =>
-              // localStorage.getItem("token") ? <Home /> : <Login />
-              auth.isAuthenticated ? <Home /> : <Login />
-            }
+            render={() => (auth.isAuthenticated ? <Home /> : <Login />)}
           />
           <Route
             path="/admin"
-            render={() =>
-              // localStorage.getItem("admintoken") ? <AdminHome /> : <Admin />
-              auth.isAdmin ? <AdminHome /> : <Admin />
-            }
+            render={() => {
+              if (auth.isAdmin) {
+                return <AdminHome />;
+              } else {
+                return <Admin />;
+              }
+            }}
           />
           <Route exact path="*" render={() => <NotFound loc="/" />} />
         </Switch>

@@ -9,9 +9,9 @@ Comment.post('/comments', auth, async (req, res) => {
     let date = new Date().toISOString().slice(0, 10);
     let timeStamp = date + ' ' + time;
 
-    let { author, content, email, post_id } = req.body
+    let { author, content, email, post_id, user_id } = req.body
 
-    const comments = await pool.query("insert into comment(author, content, create_time, email, post_id) values($1,$2,$3,$4,$5) returning *", [author, content, timeStamp, email, post_id]);
+    const comments = await pool.query("insert into comment(author, content, create_time, email, post_id,user_id) values($1,$2,$3,$4,$5,$6) returning *", [author, content, timeStamp, email, post_id, user_id]);
 
     return res.status(201).json(comments.rows);
   } catch (error) {

@@ -1,6 +1,5 @@
 import { useState, useContext, useEffect } from "react";
 import axios from "axios";
-import { AiOutlineArrowLeft } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { Context } from "../../App";
 import "./NewComment.css";
@@ -28,15 +27,15 @@ const NewComment = () => {
   let [newComment, setNewComment] = useState({
     author: "",
     content: "",
-    email: "",
+    user_id: "",
     post_id: ""
   });
 
-  const { author, content, email, post_id } = newComment;
+  const { author, content, user_id, post_id } = newComment;
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (!content || !email || !post_id) {
+    if (!content || !user_id || !post_id) {
       return window.alert("Field's cannot be empty");
     } else {
       try {
@@ -45,7 +44,7 @@ const NewComment = () => {
           {
             author,
             content,
-            email,
+            user_id,
             post_id
           },
           {
@@ -57,7 +56,12 @@ const NewComment = () => {
         if (res.status === 201) {
           alert("Comment Created Successfully");
         }
-        setNewComment({ title: "", user_id: "", tags: "", content: "" });
+        setNewComment({
+          author: "",
+          user_id: "",
+          post_id: "",
+          content: ""
+        });
       } catch (err) {
         console.warn(err);
       }
@@ -77,7 +81,7 @@ const NewComment = () => {
             onClick={(e) => {
               setNewComment({
                 ...newComment,
-                ["email"]: e.target.innerText
+                ["user_id"]: e.target.innerText
               });
             }}
             className="dropdown m-3"
@@ -89,13 +93,13 @@ const NewComment = () => {
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Select Email<span className="text-danger"> *</span>
+              Select user_id<span className="text-danger"> *</span>
             </Link>
 
             <ul className="dropdown-menu" aria-labelledby="dropdownMenuLink">
               <li>
                 {list.map((val, idx) => {
-                  return <span className="dropdown-item">{val.email}</span>;
+                  return <span className="dropdown-item">{val.user_id}</span>;
                 })}
               </li>
             </ul>
@@ -103,7 +107,7 @@ const NewComment = () => {
               className="mx-4 p-1 text-center"
               id="disabledTextInput"
               style={{ width: "200px" }}
-              value={email}
+              value={user_id}
               type="text"
             />
           </div>
